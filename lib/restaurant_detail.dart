@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/models/restaurant_model.dart';
+import 'package:restaurant_app/domain/entities/restaurant_entity.dart';
 
 import 'widgets/subtitle_icon.dart';
 
 class RestaurantDetailScreen extends StatelessWidget {
   static const routeName = '/restaurant-detail';
-  final Restaurant restaurant;
+  final RestaurantEntity restaurant;
   const RestaurantDetailScreen({
     super.key,
     required this.restaurant,
