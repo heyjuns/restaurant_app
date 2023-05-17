@@ -1,6 +1,7 @@
-import 'package:restaurant_app/data/models/restaurant_model.dart';
-import 'package:restaurant_app/domain/entities/restaurant_entity.dart';
-import 'package:restaurant_app/domain/entities/restaurants_entity.dart';
+import 'package:restaurant_app/modules/restaurants/data/models/restaurant_model.dart';
+
+import '../../domain/entities/restaurant_entity.dart';
+import '../../domain/entities/restaurants_entity.dart';
 
 class RestaurantsModel extends RestaurantsEntity {
   RestaurantsModel.fromJson(Map<String, dynamic> json)

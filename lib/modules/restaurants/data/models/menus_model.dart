@@ -1,6 +1,6 @@
-import 'package:restaurant_app/data/models/menu_model.dart';
-import 'package:restaurant_app/domain/entities/menu_entity.dart';
-import 'package:restaurant_app/domain/entities/menus_entity.dart';
+import '../../domain/entities/menu_entity.dart';
+import '../../domain/entities/menus_entity.dart';
+import 'menu_model.dart';
 
 class MenusModel extends MenusEntity {
   MenusModel.fromJson(Map<String, dynamic> json)

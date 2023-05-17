@@ -1,4 +1,4 @@
-import 'package:restaurant_app/domain/entities/restaurant_entity.dart';
+import 'restaurant_entity.dart';
 
 class RestaurantsEntity {
   final List<RestaurantEntity> restaurants;

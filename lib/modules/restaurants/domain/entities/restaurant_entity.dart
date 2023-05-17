@@ -1,4 +1,4 @@
-import 'package:restaurant_app/domain/entities/menus_entity.dart';
+import 'menus_entity.dart';
 
 class RestaurantEntity {
   final String id;

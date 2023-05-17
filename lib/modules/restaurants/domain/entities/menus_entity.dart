@@ -1,4 +1,4 @@
-import 'package:restaurant_app/domain/entities/menu_entity.dart';
+import 'menu_entity.dart';
 
 class MenusEntity {
   final List<MenuEntity> foods;

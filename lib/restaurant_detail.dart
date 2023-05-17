@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/domain/entities/restaurant_entity.dart';
 
-import 'widgets/subtitle_icon.dart';
+import 'modules/restaurants/domain/entities/restaurant_entity.dart';
+import 'modules/restaurants/widgets/subtitle_icon.dart';
 
 class RestaurantDetailScreen extends StatelessWidget {
   static const routeName = '/restaurant-detail';

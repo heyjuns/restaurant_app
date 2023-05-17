@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/domain/entities/restaurant_entity.dart';
 import 'package:restaurant_app/restaurant_detail.dart';
-import 'package:restaurant_app/widgets/subtitle_icon.dart';
+
+import '../domain/entities/restaurant_entity.dart';
+import 'subtitle_icon.dart';
 
 class RestaurantCard extends StatelessWidget {
   final RestaurantEntity restaurant;
