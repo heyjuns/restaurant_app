@@ -1,9 +1,9 @@
-class CustomerReviewEntity {
+class RestaurantCustomerReviewEntity {
   final String name;
   final String review;
   final String date;
 
-  CustomerReviewEntity({
+  RestaurantCustomerReviewEntity({
     required this.name,
     required this.review,
     required this.date,
