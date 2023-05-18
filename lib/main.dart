@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/modules/restaurants/domain/entities/restaurant_detail_entity.dart';
+import 'package:restaurant_app/modules/restaurants/restaurants_page.dart';
 import 'package:restaurant_app/restaurant_detail.dart';
-import 'package:restaurant_app/restaurants.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,9 +13,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: RestaurantsScreen.routeName,
+      initialRoute: RestaurantListPage.routeName,
       routes: {
-        RestaurantsScreen.routeName: (context) => const RestaurantsScreen(),
+        RestaurantListPage.routeName: (context) => const RestaurantListPage(),
         RestaurantDetailScreen.routeName: (context) => RestaurantDetailScreen(
               restaurant: ModalRoute.of(context)?.settings.arguments
                   as RestaurantDetailEntity,

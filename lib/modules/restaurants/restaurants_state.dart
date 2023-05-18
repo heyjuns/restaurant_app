@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 @immutable
 abstract class RestaurantsState {}
 
-class RestaurantsInitEvent extends RestaurantsState {}
+class RestaurantsInitState extends RestaurantsState {}
 
-class RestaurantsNoInternetEvent extends RestaurantsState {}
+class RestaurantsNoInternetState extends RestaurantsState {}
 
-class RestaurantsLoadedEvent extends RestaurantsState {}
+class RestaurantsLoadedState extends RestaurantsState {}
 
-class RestaurantsLoadingEvent extends RestaurantsState {}
+class RestaurantsLoadingState extends RestaurantsState {}
 
-class RestaurantsErrorEvent extends RestaurantsState {
+class RestaurantsErrorState extends RestaurantsState {
   late final String errorMessage;
-  RestaurantsErrorEvent(this.errorMessage);
+  RestaurantsErrorState(this.errorMessage);
 }

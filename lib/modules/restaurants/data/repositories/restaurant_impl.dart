@@ -16,6 +16,7 @@ class RestaurantImpl extends RestaurantRepository {
     const endPoint = 'list';
 
     var response = await http.get(Uri.parse('$baseUrl/$endPoint'));
+    print(response);
     return jsonDecode(response.body);
   }
 
