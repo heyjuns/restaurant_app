@@ -3,7 +3,7 @@ import 'package:restaurant_app/modules/restaurants/domain/entities/restaurant_su
 class ResponseRestaurantListEntity {
   final bool error;
   final String message;
-  final int count;
+  final num count;
   final List<RestaurantSummaryEntity> restaurants;
 
   ResponseRestaurantListEntity({

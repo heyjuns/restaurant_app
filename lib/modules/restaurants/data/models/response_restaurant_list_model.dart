@@ -8,9 +8,10 @@ class ResponseRestaurantListModel extends ResponseRestaurantListEntity {
           count: json["count"] ?? 0,
           error: json["error"] ?? false,
           message: json["message"] ?? "",
-          restaurants:
-              List<RestaurantSummaryEntity>.from(json["restaurants"].map(
-            (item) => RestaurantSummaryModel.fromJson(item),
-          )),
+          restaurants: List<RestaurantSummaryEntity>.from(
+            json["restaurants"].map(
+              (item) => RestaurantSummaryModel.fromJson(item),
+            ),
+          ),
         );
 }

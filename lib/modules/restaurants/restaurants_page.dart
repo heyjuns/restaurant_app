@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restaurant_app/modules/restaurants/data/repositories/restaurant_impl.dart';
 import 'package:restaurant_app/modules/restaurants/restaurants_cubit.dart';
+import 'package:restaurant_app/modules/restaurants/restaurants_state.dart';
+import 'package:restaurant_app/modules/restaurants/widgets/restaurant_item.dart';
 
 class RestaurantListPage extends StatefulWidget {
   static const routeName = '/restaurants';
@@ -14,9 +18,10 @@ class _RestaurantListPageState extends State<RestaurantListPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    cubit.getRestaurantList();
+    cubit = RestaurantsCubit(
+      restaurantImpl: RestaurantImpl(),
+    )..getList();
   }
 
   @override
@@ -39,27 +44,36 @@ class _RestaurantListPageState extends State<RestaurantListPage> {
               const SizedBox(
                 height: 24,
               ),
-              // FutureBuilder<String>(
-              //   future: DefaultAssetBundle.of(context)
-              //       .loadString('assets/restaurants.json'),
-              //   builder: (context, snapshot) {
-              //     if (snapshot.hasData) {
-              //       final List<RestaurantEntity> restaurants =
-              //           restaurantsFromJson(snapshot.data!).restaurants;
-              //       return Expanded(
-              //         child: ListView.builder(
-              //           itemCount: restaurants.length,
-              //           itemBuilder: (context, index) {
-              //             return RestaurantItemCard(
-              //                 restaurant: restaurants[index]);
-              //           },
-              //         ),
-              //       );
-              //     }
-
-              //     return Container();
-              //   },
-              // ),
+              BlocProvider(
+                create: (context) => cubit,
+                child: BlocBuilder(
+                  bloc: cubit,
+                  builder: (context, state) {
+                    if (state is RestaurantsLoadingState) {
+                      return const Expanded(
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    }
+                    if (state is RestaurantsLoadedState) {
+                      return Expanded(
+                        child: ListView.builder(
+                          itemCount: cubit.listOfRestaurant.length,
+                          itemBuilder: (context, index) {
+                            return RestaurantCard(
+                                restaurant: cubit.listOfRestaurant[index]);
+                          },
+                        ),
+                      );
+                    }
+                    if (state is RestaurantsErrorState) {
+                      return Expanded(child: Text(state.errorMessage));
+                    }
+                    return Container();
+                  },
+                ),
+              )
             ],
           ),
         ),

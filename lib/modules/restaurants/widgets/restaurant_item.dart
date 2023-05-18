@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_app/modules/restaurants/domain/entities/restaurant_summary_entity.dart';
 import 'package:restaurant_app/restaurant_detail.dart';
+import 'package:restaurant_app/utils.dart';
 
 import '../domain/entities/restaurant_detail_entity.dart';
 import 'subtitle_icon.dart';
 
 class RestaurantCard extends StatelessWidget {
-  final RestaurantDetailEntity restaurant;
+  final RestaurantSummaryEntity restaurant;
   const RestaurantCard({
     super.key,
     required this.restaurant,
@@ -28,7 +30,7 @@ class RestaurantCard extends StatelessWidget {
                 child: Hero(
                   tag: restaurant.id,
                   child: Image.network(
-                    restaurant.pictureId,
+                    Utils.getImageUrl("small", restaurant.pictureId),
                     errorBuilder: (ctx, error, _) =>
                         const Center(child: Icon(Icons.error)),
                   ),

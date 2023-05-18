@@ -4,7 +4,7 @@ class RestaurantSummaryEntity {
   final String description;
   final String pictureId;
   final String city;
-  final double rating;
+  final num rating;
 
   RestaurantSummaryEntity({
     required this.id,

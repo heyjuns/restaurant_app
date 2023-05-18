@@ -8,7 +8,7 @@ class RestaurantDetailEntity {
   final String description;
   final String pictureId;
   final String city;
-  final double rating;
+  final num rating;
   final List<NameEntity> categories;
   final MenusEntity menus;
   final List<RestaurantCustomerReviewEntity> customerReviews;

@@ -1,8 +1,8 @@
-import 'package:restaurant_app/modules/restaurants/data/models/customer_review_model.dart';
 import 'package:restaurant_app/modules/restaurants/data/models/menus_model.dart';
 import 'package:restaurant_app/modules/restaurants/data/models/name_model.dart';
-import 'package:restaurant_app/modules/restaurants/domain/entities/customer_review_entity.dart';
+import 'package:restaurant_app/modules/restaurants/data/models/restaurant_customer_review_model.dart';
 import 'package:restaurant_app/modules/restaurants/domain/entities/name_entity.dart';
+import 'package:restaurant_app/modules/restaurants/domain/entities/restaurant_customer_review_entity.dart';
 
 import '../../domain/entities/restaurant_detail_entity.dart';
 
@@ -19,8 +19,8 @@ class RestaurantDetailModel extends RestaurantDetailEntity {
               (item) => NameModel.fromJson(json),
             )),
             menus: MenusModel.fromJson(json["menus"]),
-            customerReviews:
-                List<CustomerReviewEntity>.from(json["customerReviews"].map(
-              (item) => CustomerReviewModel.fromJson(item),
+            customerReviews: List<RestaurantCustomerReviewEntity>.from(
+                json["customerReviews"].map(
+              (item) => RestaurantCustomerReviewModel.fromJson(item),
             )));
 }
