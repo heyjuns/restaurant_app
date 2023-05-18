@@ -1,8 +1,7 @@
-import '../../domain/entities/menus_entity.dart';
-import '../../domain/entities/restaurant_entity.dart';
+import 'package:restaurant_app/modules/restaurants/domain/entities/restaurant_summary_entity.dart';
 
-class RestaurantModel extends RestaurantEntity {
-  RestaurantModel.fromJson(Map<String, dynamic> json)
+class RestaurantSummaryModel extends RestaurantSummaryEntity {
+  RestaurantSummaryModel.fromJson(Map<String, dynamic> json)
       : super(
           city: json["city"] ?? "",
           description: json["description"] ?? "",
@@ -10,6 +9,5 @@ class RestaurantModel extends RestaurantEntity {
           name: json["name"] ?? "",
           pictureId: json["pictureId"] ?? "",
           rating: json["rating"] ?? 0.0,
-          menus: MenusEntity.fromJson(json["menus"]),
         );
 }

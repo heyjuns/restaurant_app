@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/modules/restaurants/domain/entities/restaurant_entity.dart';
+import 'package:restaurant_app/modules/restaurants/domain/entities/restaurant_detail_entity.dart';
 import 'package:restaurant_app/restaurant_detail.dart';
 import 'package:restaurant_app/restaurants.dart';
 
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         RestaurantsScreen.routeName: (context) => const RestaurantsScreen(),
         RestaurantDetailScreen.routeName: (context) => RestaurantDetailScreen(
               restaurant: ModalRoute.of(context)?.settings.arguments
-                  as RestaurantEntity,
+                  as RestaurantDetailEntity,
             ),
       },
       debugShowCheckedModeBanner: false,

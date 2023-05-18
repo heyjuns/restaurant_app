@@ -1,20 +1,9 @@
-import 'restaurant_entity.dart';
+import 'package:restaurant_app/modules/restaurants/domain/entities/restaurant_summary_entity.dart';
 
 class RestaurantsEntity {
-  final List<RestaurantEntity> restaurants;
+  final List<RestaurantSummaryEntity> restaurants;
 
   RestaurantsEntity({
     required this.restaurants,
   });
-
-  factory RestaurantsEntity.fromJson(Map<String, dynamic> json) =>
-      RestaurantsEntity(
-        restaurants: List<RestaurantEntity>.from(
-            json["restaurants"].map((x) => RestaurantEntity.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "restaurants":
-            List<RestaurantEntity>.from(restaurants.map((x) => x.toJson())),
-      };
 }
