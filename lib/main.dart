@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:restaurant_app/modules/restaurants/domain/entities/restaurant_detail_entity.dart';
 import 'package:restaurant_app/modules/restaurants/features/restaurant_detail/restaurant_detail_page.dart';
+import 'package:restaurant_app/modules/restaurants/features/restaurant_rating_review/restaurant_rating_review_page.dart';
 import 'package:restaurant_app/modules/restaurants/features/restaurants/restaurants_page.dart';
 
 void main() {
@@ -17,6 +19,11 @@ class MyApp extends StatelessWidget {
         RestaurantListPage.routeName: (context) => const RestaurantListPage(),
         RestaurantDetailPage.routeName: (context) => RestaurantDetailPage(
               id: ModalRoute.of(context)?.settings.arguments as String,
+            ),
+        RestaurantRatingReviewPage.routeName: (context) =>
+            RestaurantRatingReviewPage(
+              restaurant: ModalRoute.of(context)?.settings.arguments
+                  as RestaurantDetailEntity,
             ),
       },
       debugShowCheckedModeBanner: false,
