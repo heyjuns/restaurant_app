@@ -91,7 +91,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                                     .headlineSmall!
                                     .copyWith(fontWeight: FontWeight.bold),
                               ),
-                              buildMenus(state.restaurant.menus.foods, 'foods'),
+                              buildMenus(state.restaurant.menus.foods, 'food'),
                               const SizedBox(
                                 height: 32,
                               ),
