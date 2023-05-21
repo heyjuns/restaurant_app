@@ -33,9 +33,22 @@ class RestaurantImpl extends RestaurantRepository {
 
   @override
   Future<ResponseRestaurantListEntity> getRestaurantBySearch(
-      String searchTerm) {
-    // TODO: implement getRestaurantBySearch
-    throw UnimplementedError();
+      String searchTerm) async {
+    const endPoint = '/search';
+
+    print('$baseUrl/$endPoint?q=$searchTerm');
+    try {
+      var response =
+          await http.get(Uri.parse('$baseUrl/$endPoint?q=$searchTerm'));
+
+      if (response.statusCode == 200) {
+        return ResponseRestaurantListModel.fromJson(jsonDecode(response.body));
+      }
+    } catch (e) {
+      throw Exception('failed to fetch restaurant list: $e');
+    }
+
+    throw Exception('something went wrong');
   }
 
   @override

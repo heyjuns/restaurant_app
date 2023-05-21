@@ -21,4 +21,15 @@ class RestaurantsCubit extends Cubit<RestaurantsState> {
       emit(RestaurantsErrorState(result.message));
     }
   }
+
+  Future<void> getListBySearch(String search) async {
+    emit(RestaurantsLoadingState());
+    var result = await restaurantImpl.getRestaurantBySearch(search);
+    if (result.error == false) {
+      emit(RestaurantsLoadedState());
+      listOfRestaurant = result.restaurants;
+    } else {
+      emit(RestaurantsErrorState(result.message));
+    }
+  }
 }

@@ -16,7 +16,8 @@ class RestaurantListPage extends StatefulWidget {
 
 class _RestaurantListPageState extends State<RestaurantListPage> {
   late RestaurantsCubit cubit;
-
+  TextEditingController searchQueryController = TextEditingController();
+  bool isSearching = false;
   @override
   void initState() {
     super.initState();
@@ -26,26 +27,42 @@ class _RestaurantListPageState extends State<RestaurantListPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    searchQueryController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: isSearching ? _buildSearchField() : const Text('Restomoo'),
+        actions: [
+          !isSearching
+              ? IconButton(
+                  onPressed: () {
+                    setState(() {
+                      isSearching = true;
+                    });
+                  },
+                  icon: const Icon(Icons.search))
+              : IconButton(
+                  onPressed: () {
+                    setState(() {
+                      isSearching = false;
+                      searchQueryController.text = "";
+                      cubit.getList();
+                    });
+                  },
+                  icon: const Icon(Icons.close))
+        ],
+      ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Restaurant',
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-              Text(
-                'Recommendation restarurant for you!',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              const SizedBox(
-                height: 24,
-              ),
               BlocProvider(
                 create: (context) => cubit,
                 child: BlocBuilder<RestaurantsCubit, RestaurantsState>(
@@ -84,5 +101,20 @@ class _RestaurantListPageState extends State<RestaurantListPage> {
         ),
       ),
     );
+  }
+
+  Widget _buildSearchField() {
+    return TextField(
+        controller: searchQueryController,
+        autofocus: true,
+        decoration: const InputDecoration(
+          hintText: "Search Data...",
+          border: InputBorder.none,
+          hintStyle: TextStyle(color: Colors.white30),
+        ),
+        style: const TextStyle(color: Colors.white, fontSize: 16.0),
+        onChanged: (query) {
+          cubit.getListBySearch(query);
+        });
   }
 }
