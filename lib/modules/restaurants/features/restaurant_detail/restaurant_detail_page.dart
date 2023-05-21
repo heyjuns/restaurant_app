@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_app/modules/restaurants/data/repositories/restaurant_impl.dart';
+import 'package:restaurant_app/modules/restaurants/domain/entities/menus_entity.dart';
+import 'package:restaurant_app/modules/restaurants/domain/entities/name_entity.dart';
 import 'package:restaurant_app/modules/restaurants/features/restaurant_detail/restaurant_detail_state.dart';
 import 'package:restaurant_app/utils.dart';
 
 import 'restaurant_detail_cubit.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class RestaurantDetailPage extends StatefulWidget {
   static const routeName = '/restaurant-detail';
@@ -83,34 +86,27 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                             children: [
                               Text(
                                 'Foods',
-                                style: Theme.of(context).textTheme.titleLarge,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall!
+                                    .copyWith(fontWeight: FontWeight.bold),
                               ),
-                              ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: state.restaurant.menus.foods.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return ListTile(
-                                    title: Text(state
-                                        .restaurant.menus.foods[index].name),
-                                  );
-                                },
+                              buildMenus(state.restaurant.menus.foods, 'foods'),
+                              const SizedBox(
+                                height: 32,
                               ),
                               Text(
                                 'Drinks',
-                                style: Theme.of(context).textTheme.titleLarge,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall!
+                                    .copyWith(fontWeight: FontWeight.bold),
                               ),
-                              ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: state.restaurant.menus.drinks.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return ListTile(
-                                    title: Text(state
-                                        .restaurant.menus.drinks[index].name),
-                                  );
-                                },
+                              const SizedBox(
+                                height: 32,
                               ),
+                              buildMenus(
+                                  state.restaurant.menus.drinks, 'drink'),
                             ],
                           ),
                         ),
@@ -124,6 +120,36 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
           ],
         )),
       ),
+    );
+  }
+
+  Widget buildMenus(List<NameEntity> menus, String type) {
+    return ListView.separated(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: menus.length,
+      separatorBuilder: (context, index) => const Divider(),
+      itemBuilder: (BuildContext context, int index) {
+        return SizedBox(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                menus[index].name,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              SizedBox(
+                width: 100,
+                height: 100,
+                child: SvgPicture.asset(
+                  'images/$type.svg',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 

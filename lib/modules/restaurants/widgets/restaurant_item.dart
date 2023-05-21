@@ -27,12 +27,17 @@ class RestaurantCard extends StatelessWidget {
               Expanded(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: Hero(
-                    tag: restaurant.id,
-                    child: Image.network(
-                      Utils.getImageUrl("small", restaurant.pictureId),
-                      errorBuilder: (ctx, error, _) =>
-                          const Center(child: Icon(Icons.error)),
+                  child: SizedBox(
+                    width: 100,
+                    height: 100,
+                    child: Hero(
+                      tag: restaurant.id,
+                      child: Image.network(
+                        Utils.getImageUrl("small", restaurant.pictureId),
+                        fit: BoxFit.cover,
+                        errorBuilder: (ctx, error, _) =>
+                            const Center(child: Icon(Icons.error)),
+                      ),
                     ),
                   ),
                 ),
@@ -47,24 +52,23 @@ class RestaurantCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text(
-                      restaurant.name,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium!
-                          .copyWith(fontWeight: FontWeight.w500),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          restaurant.name,
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .copyWith(fontWeight: FontWeight.w500),
+                        ),
+                        SubtitleIcon(
+                          icons: Icons.location_pin,
+                          subtitle: restaurant.city,
+                          iconColor: Colors.red,
+                        ),
+                      ],
                     ),
-                    // const SizedBox(
-                    //   height: 4,
-                    // ),
-                    SubtitleIcon(
-                      icons: Icons.location_pin,
-                      subtitle: restaurant.city,
-                      iconColor: Colors.red,
-                    ),
-                    // const SizedBox(
-                    //   height: 8,
-                    // ),
                     SubtitleIcon(
                       icons: Icons.star,
                       iconColor: Colors.yellow,

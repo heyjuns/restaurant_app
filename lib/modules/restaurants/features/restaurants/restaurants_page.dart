@@ -28,6 +28,7 @@ class _RestaurantListPageState extends State<RestaurantListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -59,8 +60,11 @@ class _RestaurantListPageState extends State<RestaurantListPage> {
                     }
                     if (state is RestaurantsLoadedState) {
                       return Expanded(
-                        child: ListView.builder(
+                        child: ListView.separated(
                           itemCount: cubit.listOfRestaurant.length,
+                          separatorBuilder: (context, index) {
+                            return const Divider();
+                          },
                           itemBuilder: (context, index) {
                             return RestaurantCard(
                                 restaurant: cubit.listOfRestaurant[index]);
