@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_app/modules/restaurants/data/repositories/restaurant_impl.dart';
 import 'package:restaurant_app/modules/restaurants/domain/entities/menus_entity.dart';
 import 'package:restaurant_app/modules/restaurants/domain/entities/name_entity.dart';
+import 'package:restaurant_app/modules/restaurants/domain/entities/restaurant_detail_entity.dart';
 import 'package:restaurant_app/modules/restaurants/features/restaurant_detail/restaurant_detail_state.dart';
 import 'package:restaurant_app/utils.dart';
 
@@ -73,9 +74,12 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                                 ),
                               ),
                             ),
+                            Container(
+                              margin: const EdgeInsets.only(top: 200),
+                              child: buildCard(state, context),
+                            ),
                           ],
                         ),
-                        buildCard(state, context),
                         const SizedBox(
                           height: 16,
                         ),
@@ -170,38 +174,9 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                       fontWeight: FontWeight.bold,
                     ),
               ),
-              const Divider(height: 32),
-              Row(
-                children: [
-                  const Icon(
-                    Icons.star_rounded,
-                    color: Colors.amber,
-                  ),
-                  const SizedBox(
-                    width: 4,
-                  ),
-                  Text(
-                    state.restaurant.rating.toString(),
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                  const SizedBox(
-                    width: 4,
-                  ),
-                  Text(
-                      '(${state.restaurant.customerReviews.length.toString()})'),
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 8),
-                    decoration: const BoxDecoration(
-                        shape: BoxShape.circle, color: Colors.black),
-                    width: 4,
-                    height: 4,
-                  ),
-                  const Text('Rating and reviews'),
-                ],
-              ),
-              const Divider(height: 32),
+              const Divider(),
+              buildratingHighlight(state.restaurant, context),
+              const Divider(),
               Text(state.restaurant.description),
               SizedBox(
                 height: 50,
@@ -224,6 +199,51 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  InkWell buildratingHighlight(
+      RestaurantDetailEntity restaurant, BuildContext context) {
+    return InkWell(
+      onTap: () {},
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                const Icon(
+                  Icons.star_rounded,
+                  color: Colors.amber,
+                ),
+                const SizedBox(
+                  width: 4,
+                ),
+                Text(
+                  restaurant.rating.toString(),
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+                const SizedBox(
+                  width: 4,
+                ),
+                Text('(${restaurant.customerReviews.length.toString()})'),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 8),
+                  decoration: const BoxDecoration(
+                      shape: BoxShape.circle, color: Colors.black),
+                  width: 4,
+                  height: 4,
+                ),
+                const Text('Rating and reviews'),
+              ],
+            ),
+            const Icon(Icons.chevron_right),
+          ],
         ),
       ),
     );

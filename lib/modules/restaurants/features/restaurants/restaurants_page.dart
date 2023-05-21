@@ -108,7 +108,7 @@ class _RestaurantListPageState extends State<RestaurantListPage> {
         controller: searchQueryController,
         autofocus: true,
         decoration: const InputDecoration(
-          hintText: "Search Data...",
+          hintText: "Search Restaurant...",
           border: InputBorder.none,
           hintStyle: TextStyle(color: Colors.white30),
         ),
