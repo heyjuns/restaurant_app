@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_app/modules/restaurants/data/repositories/restaurant_impl.dart';
-import 'package:restaurant_app/modules/restaurants/restaurants_cubit.dart';
-import 'package:restaurant_app/modules/restaurants/restaurants_state.dart';
 import 'package:restaurant_app/modules/restaurants/widgets/restaurant_item.dart';
+
+import 'restaurants_cubit.dart';
+import 'restaurants_state.dart';
 
 class RestaurantListPage extends StatefulWidget {
   static const routeName = '/restaurants';
@@ -46,7 +47,7 @@ class _RestaurantListPageState extends State<RestaurantListPage> {
               ),
               BlocProvider(
                 create: (context) => cubit,
-                child: BlocBuilder(
+                child: BlocBuilder<RestaurantsCubit, RestaurantsState>(
                   bloc: cubit,
                   builder: (context, state) {
                     if (state is RestaurantsLoadingState) {

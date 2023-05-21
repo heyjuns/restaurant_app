@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/modules/restaurants/domain/entities/restaurant_summary_entity.dart';
-import 'package:restaurant_app/restaurant_detail.dart';
+import 'package:restaurant_app/modules/restaurants/features/restaurant_detail/restaurant_detail_page.dart';
 import 'package:restaurant_app/utils.dart';
 
-import '../domain/entities/restaurant_detail_entity.dart';
 import 'subtitle_icon.dart';
 
 class RestaurantCard extends StatelessWidget {
@@ -15,65 +14,67 @@ class RestaurantCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.pushNamed(context, RestaurantDetailScreen.routeName,
-            arguments: restaurant);
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Row(
-          children: [
-            Expanded(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Hero(
-                  tag: restaurant.id,
-                  child: Image.network(
-                    Utils.getImageUrl("small", restaurant.pictureId),
-                    errorBuilder: (ctx, error, _) =>
-                        const Center(child: Icon(Icons.error)),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: InkWell(
+        onTap: () {
+          Navigator.pushNamed(context, RestaurantDetailPage.routeName,
+              arguments: restaurant.id);
+        },
+        child: IntrinsicHeight(
+          child: Row(
+            children: [
+              Expanded(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Hero(
+                    tag: restaurant.id,
+                    child: Image.network(
+                      Utils.getImageUrl("small", restaurant.pictureId),
+                      errorBuilder: (ctx, error, _) =>
+                          const Center(child: Icon(Icons.error)),
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(
-              width: 8,
-            ),
-            Expanded(
-              flex: 2,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    restaurant.name,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleMedium!
-                        .copyWith(fontWeight: FontWeight.w500),
-                  ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  SubtitleIcon(
-                    icons: Icons.location_pin,
-                    subtitle: restaurant.city,
-                    iconColor: Colors.red,
-                  ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  SubtitleIcon(
-                    icons: Icons.star,
-                    iconColor: Colors.yellow,
-                    subtitle: restaurant.rating.toString(),
-                  )
-                ],
+              const SizedBox(
+                width: 8,
               ),
-            )
-          ],
+              Expanded(
+                flex: 2,
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      restaurant.name,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium!
+                          .copyWith(fontWeight: FontWeight.w500),
+                    ),
+                    // const SizedBox(
+                    //   height: 4,
+                    // ),
+                    SubtitleIcon(
+                      icons: Icons.location_pin,
+                      subtitle: restaurant.city,
+                      iconColor: Colors.red,
+                    ),
+                    // const SizedBox(
+                    //   height: 8,
+                    // ),
+                    SubtitleIcon(
+                      icons: Icons.star,
+                      iconColor: Colors.yellow,
+                      subtitle: restaurant.rating.toString(),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:restaurant_app/modules/restaurants/data/models/response_restaurant_detail_model.dart';
 import 'package:restaurant_app/modules/restaurants/data/models/response_restaurant_list_model.dart';
 import 'package:restaurant_app/modules/restaurants/domain/entities/response_restaurant_list_entity.dart';
 
@@ -39,9 +40,22 @@ class RestaurantImpl extends RestaurantRepository {
   }
 
   @override
-  Future<ResponseRestaurantDetailEntity> getRestaurantDetail(int id) {
-    // TODO: implement getRestaurantDetail
-    throw UnimplementedError();
+  Future<ResponseRestaurantDetailEntity> getRestaurantDetail(String id) async {
+    const endPoint = 'detail';
+
+    try {
+      var response = await http.get(Uri.parse('$baseUrl/$endPoint/$id'));
+
+      if (response.statusCode == 200) {
+        return ResponseRestaurantDetailModel.fromJson(
+            jsonDecode(response.body));
+      }
+    } catch (e) {
+      throw Exception('failed to fetch restaurant detail id $id: $e');
+    }
+
+    throw Exception(
+        'something went wrong when fetching restaurant detail id $id');
   }
 
   @override
