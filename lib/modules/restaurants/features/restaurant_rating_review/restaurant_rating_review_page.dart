@@ -2,11 +2,31 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/modules/restaurants/domain/entities/restaurant_detail_entity.dart';
+import 'package:restaurant_app/modules/restaurants/features/restaurant_rating_review/restaurant_rating_review_cubit.dart';
 
-class RestaurantRatingReviewPage extends StatelessWidget {
+import '../../data/repositories/restaurant_impl.dart';
+
+class RestaurantRatingReviewPage extends StatefulWidget {
   static const routeName = "/restaurant-rating-review";
   final RestaurantDetailEntity restaurant;
   const RestaurantRatingReviewPage({super.key, required this.restaurant});
+
+  @override
+  State<RestaurantRatingReviewPage> createState() =>
+      _RestaurantRatingReviewPageState();
+}
+
+class _RestaurantRatingReviewPageState
+    extends State<RestaurantRatingReviewPage> {
+  late RestaurantRatingReviewCubit cubit;
+
+  @override
+  void initState() {
+    super.initState();
+    cubit = RestaurantRatingReviewCubit(
+      restaurantImpl: RestaurantImpl(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +45,7 @@ class RestaurantRatingReviewPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      restaurant.rating.toString(),
+                      widget.restaurant.rating.toString(),
                       style: Theme.of(context)
                           .textTheme
                           .headlineMedium!
@@ -36,35 +56,35 @@ class RestaurantRatingReviewPage extends StatelessWidget {
                     Row(
                       children: [
                         Icon(
-                          restaurant.rating > 0
+                          widget.restaurant.rating > 0
                               ? Icons.star_rounded
                               : Icons.star_outline,
                           size: 12,
                           color: Colors.amber,
                         ),
                         Icon(
-                          restaurant.rating > 1
+                          widget.restaurant.rating > 1
                               ? Icons.star_rounded
                               : Icons.star_outline,
                           size: 12,
                           color: Colors.amber,
                         ),
                         Icon(
-                          restaurant.rating > 2
+                          widget.restaurant.rating > 2
                               ? Icons.star_rounded
                               : Icons.star_outline,
                           size: 12,
                           color: Colors.amber,
                         ),
                         Icon(
-                          restaurant.rating > 3
+                          widget.restaurant.rating > 3
                               ? Icons.star_rounded
                               : Icons.star_outline,
                           size: 12,
                           color: Colors.amber,
                         ),
                         Icon(
-                          restaurant.rating > 4
+                          widget.restaurant.rating > 4
                               ? Icons.star_rounded
                               : Icons.star_outline,
                           size: 12,
@@ -73,7 +93,7 @@ class RestaurantRatingReviewPage extends StatelessWidget {
                       ],
                     ),
                     Text(
-                        '${restaurant.customerReviews.length.toString()} ratings')
+                        '${widget.restaurant.customerReviews.length.toString()} ratings')
                   ],
                 ),
                 const VerticalDivider(
@@ -95,27 +115,88 @@ class RestaurantRatingReviewPage extends StatelessWidget {
             const SizedBox(
               height: 16,
             ),
-            Text(
-              'Customer Review',
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineSmall!
-                  .copyWith(fontWeight: FontWeight.bold),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Customer Review',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineSmall!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+                TextButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        TextEditingController name = TextEditingController();
+                        TextEditingController review = TextEditingController();
+                        return AlertDialog(
+                          title: const Text('Tell us about the restaurant'),
+                          content: IntrinsicHeight(
+                            child: Column(
+                              children: [
+                                TextField(
+                                  controller: name,
+                                  decoration: const InputDecoration(
+                                    label: Text('Name'),
+                                  ),
+                                ),
+                                TextField(
+                                  controller: review,
+                                  decoration: const InputDecoration(
+                                    label: Text('Review'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          actions: [
+                            TextButton(
+                                style: TextButton.styleFrom(
+                                    foregroundColor: Colors.red),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Text('Cancel')),
+                            ElevatedButton(
+                                onPressed: () {
+                                  print(
+                                      'name: ${name.text} review: ${review.text}');
+                                  cubit.postRestaurantReview(
+                                      widget.restaurant.id,
+                                      name.text,
+                                      review.text);
+                                },
+                                child: const Text(
+                                  'Add Review',
+                                )),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                  child: const Text('Add Review'),
+                ),
+              ],
             ),
             Expanded(
               child: ListView.separated(
-                itemCount: restaurant.customerReviews.length,
+                itemCount: widget.restaurant.customerReviews.length,
                 separatorBuilder: (BuildContext context, int index) {
                   return const Divider();
                 },
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
                     leading: CircleAvatar(
-                        child: Text(restaurant.customerReviews[index].name[0]
+                        child: Text(widget
+                            .restaurant.customerReviews[index].name[0]
                             .toUpperCase())),
-                    title: Text(restaurant.customerReviews[index].review),
+                    title:
+                        Text(widget.restaurant.customerReviews[index].review),
                     subtitle: Text(
-                        "${restaurant.customerReviews[index].name} - ${restaurant.customerReviews[index].date}"),
+                        "${widget.restaurant.customerReviews[index].name} - ${widget.restaurant.customerReviews[index].date}"),
                   );
                 },
               ),

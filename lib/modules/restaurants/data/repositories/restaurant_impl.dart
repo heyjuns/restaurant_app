@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:restaurant_app/modules/restaurants/data/models/response_restaurant_add_review_model.dart';
 import 'package:restaurant_app/modules/restaurants/data/models/response_restaurant_detail_model.dart';
 import 'package:restaurant_app/modules/restaurants/data/models/response_restaurant_list_model.dart';
 import 'package:restaurant_app/modules/restaurants/domain/entities/response_restaurant_list_entity.dart';
@@ -72,8 +73,31 @@ class RestaurantImpl extends RestaurantRepository {
 
   @override
   Future<ResponseRestaurantAddReviewEntity> postRestaurantReview(
-      String id, String name, String review) {
-    // TODO: implement postRestaurantReview
-    throw UnimplementedError();
+      String id, String name, String review) async {
+    const endPoint = 'review';
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+    };
+    try {
+      var response = await http.post(
+        Uri.parse('$baseUrl/$endPoint'),
+        body: jsonEncode({
+          "id": id,
+          "name": name,
+          "review": review,
+        }),
+        headers: headers,
+      );
+      print(response.statusCode);
+      print(response.body);
+      if (response.statusCode == 201) {
+        return ResponseRestaurantAddReviewModel.fromJson(
+            jsonDecode(response.body));
+      }
+    } catch (e) {
+      throw Exception('failed to post review id $id: $e');
+    }
+
+    throw Exception('something went wrong when post review id $id');
   }
 }
