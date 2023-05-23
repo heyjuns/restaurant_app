@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:restaurant_app/modules/restaurants/data/models/response_restaurant_add_review_model.dart';
 import 'package:restaurant_app/modules/restaurants/data/models/response_restaurant_detail_model.dart';
@@ -25,11 +26,11 @@ class RestaurantImpl extends RestaurantRepository {
       if (response.statusCode == 200) {
         return ResponseRestaurantListModel.fromJson(jsonDecode(response.body));
       }
-    } catch (e) {
-      throw Exception('failed to fetch restaurant list: $e');
+    } on SocketException catch (e) {
+      throw Exception(e.message);
     }
 
-    throw Exception('something went wrong');
+    throw Exception('something went wrong when getListOfRestaurant');
   }
 
   @override
@@ -37,7 +38,6 @@ class RestaurantImpl extends RestaurantRepository {
       String searchTerm) async {
     const endPoint = '/search';
 
-    print('$baseUrl/$endPoint?q=$searchTerm');
     try {
       var response =
           await http.get(Uri.parse('$baseUrl/$endPoint?q=$searchTerm'));
@@ -45,11 +45,12 @@ class RestaurantImpl extends RestaurantRepository {
       if (response.statusCode == 200) {
         return ResponseRestaurantListModel.fromJson(jsonDecode(response.body));
       }
-    } catch (e) {
-      throw Exception('failed to fetch restaurant list: $e');
+    } on SocketException catch (e) {
+      throw Exception(e.message);
     }
 
-    throw Exception('something went wrong');
+    throw Exception(
+        'something went wrong when getRestaurantBySearch $searchTerm');
   }
 
   @override
@@ -63,12 +64,11 @@ class RestaurantImpl extends RestaurantRepository {
         return ResponseRestaurantDetailModel.fromJson(
             jsonDecode(response.body));
       }
-    } catch (e) {
-      throw Exception('failed to fetch restaurant detail id $id: $e');
+    } on SocketException catch (e) {
+      throw Exception(e.message);
     }
 
-    throw Exception(
-        'something went wrong when fetching restaurant detail id $id');
+    throw Exception('something went wrong when getRestaurantDetail $id');
   }
 
   @override
@@ -88,16 +88,14 @@ class RestaurantImpl extends RestaurantRepository {
         }),
         headers: headers,
       );
-      print(response.statusCode);
-      print(response.body);
       if (response.statusCode == 201) {
         return ResponseRestaurantAddReviewModel.fromJson(
             jsonDecode(response.body));
       }
-    } catch (e) {
-      throw Exception('failed to post review id $id: $e');
+    } on SocketException catch (e) {
+      throw Exception(e.message);
     }
 
-    throw Exception('something went wrong when post review id $id');
+    throw Exception('something went wrong when postRestaurantReview $id');
   }
 }

@@ -13,23 +13,32 @@ class RestaurantsCubit extends Cubit<RestaurantsState> {
 
   Future<void> getList() async {
     emit(RestaurantsLoadingState());
-    var result = await restaurantImpl.getListOfRestaurant();
-    if (result.error == false) {
-      emit(RestaurantsLoadedState());
-      listOfRestaurant = result.restaurants;
-    } else {
-      emit(RestaurantsErrorState(result.message));
+    try {
+      var result = await restaurantImpl.getListOfRestaurant();
+      if (result.error == false) {
+        emit(RestaurantsLoadedState());
+        listOfRestaurant = result.restaurants;
+      } else {
+        emit(RestaurantsErrorState(result.message));
+      }
+    } catch (_) {
+      emit(RestaurantsNoInternetState());
     }
   }
 
   Future<void> getListBySearch(String search) async {
-    emit(RestaurantsLoadingState());
-    var result = await restaurantImpl.getRestaurantBySearch(search);
-    if (result.error == false) {
-      emit(RestaurantsLoadedState());
-      listOfRestaurant = result.restaurants;
-    } else {
-      emit(RestaurantsErrorState(result.message));
+    try {
+      emit(RestaurantsLoadingState());
+
+      var result = await restaurantImpl.getRestaurantBySearch(search);
+      if (result.error == false) {
+        emit(RestaurantsLoadedState());
+        listOfRestaurant = result.restaurants;
+      } else {
+        emit(RestaurantsErrorState(result.message));
+      }
+    } catch (_) {
+      emit(RestaurantsNoInternetState());
     }
   }
 }

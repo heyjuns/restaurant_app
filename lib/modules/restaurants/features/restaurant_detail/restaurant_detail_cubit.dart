@@ -9,12 +9,16 @@ class RestaurantDetailCubit extends Cubit<RestaurantDetailState> {
   }) : super(RestaurantDetailInitState());
 
   Future<void> getDetail(String id) async {
-    emit(RestaurantDetailLoadingState());
-    var result = await restaurantImpl.getRestaurantDetail(id);
-    if (result.error == false) {
-      emit(RestaurantDetailLoadedState(restaurant: result.restaurant));
-    } else {
-      emit(RestaurantDetailErrorState(result.message));
+    try {
+      emit(RestaurantDetailLoadingState());
+      var result = await restaurantImpl.getRestaurantDetail(id);
+      if (result.error == false) {
+        emit(RestaurantDetailLoadedState(restaurant: result.restaurant));
+      } else {
+        emit(RestaurantDetailErrorState(result.message));
+      }
+    } catch (e) {
+      emit(RestaurantDetailNoInternetState());
     }
   }
 }

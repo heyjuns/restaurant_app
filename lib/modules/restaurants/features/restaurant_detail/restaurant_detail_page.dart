@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_app/modules/restaurants/data/repositories/restaurant_impl.dart';
-import 'package:restaurant_app/modules/restaurants/domain/entities/menus_entity.dart';
 import 'package:restaurant_app/modules/restaurants/domain/entities/name_entity.dart';
 import 'package:restaurant_app/modules/restaurants/domain/entities/restaurant_detail_entity.dart';
 import 'package:restaurant_app/modules/restaurants/features/restaurant_detail/restaurant_detail_state.dart';
 import 'package:restaurant_app/modules/restaurants/features/restaurant_rating_review/restaurant_rating_review_page.dart';
+import 'package:restaurant_app/modules/restaurants/widgets/no_internet_widget.dart';
 import 'package:restaurant_app/utils.dart';
 
 import 'restaurant_detail_cubit.dart';
@@ -46,7 +46,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
               child: BlocBuilder<RestaurantDetailCubit, RestaurantDetailState>(
                 builder: (context, state) {
                   if (state is RestaurantDetailLoadingState) {
-                    return const CircularProgressIndicator();
+                    return const Center(child: CircularProgressIndicator());
                   }
                   if (state is RestaurantDetailLoadedState) {
                     return Column(
@@ -117,6 +117,12 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                         ),
                       ],
                     );
+                  }
+                  if (state is RestaurantDetailErrorState) {
+                    return Text(state.errorMessage);
+                  }
+                  if (state is RestaurantDetailNoInternetState) {
+                    return const NoInternetWidget();
                   }
                   return Container();
                 },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_app/modules/restaurants/data/repositories/restaurant_impl.dart';
+import 'package:restaurant_app/modules/restaurants/widgets/no_internet_widget.dart';
 import 'package:restaurant_app/modules/restaurants/widgets/restaurant_item.dart';
 
 import 'restaurants_cubit.dart';
@@ -91,6 +92,9 @@ class _RestaurantListPageState extends State<RestaurantListPage> {
                     }
                     if (state is RestaurantsErrorState) {
                       return Expanded(child: Text(state.errorMessage));
+                    }
+                    if (state is RestaurantsNoInternetState) {
+                      return const NoInternetWidget();
                     }
                     return Container();
                   },

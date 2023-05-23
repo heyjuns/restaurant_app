@@ -17,11 +17,15 @@ class RestaurantRatingReviewCubit extends Cubit<RestaurantRatingReviewState> {
   Future<void> postRestaurantReview(
       String id, String name, String review) async {
     emit(RestaurantRatingReviewLoadingState());
-    var result = await restaurantImpl.postRestaurantReview(id, name, review);
-    if (result.error == false) {
-      updateCustomerReviews(result.customerReviews);
-    } else {
-      emit(RestaurantRatingReviewErrorState(result.message));
+    try {
+      var result = await restaurantImpl.postRestaurantReview(id, name, review);
+      if (result.error == false) {
+        updateCustomerReviews(result.customerReviews);
+      } else {
+        emit(RestaurantRatingReviewErrorState(result.message));
+      }
+    } catch (e) {
+      emit(RestaurantRatingReviewNoInternetState());
     }
   }
 
