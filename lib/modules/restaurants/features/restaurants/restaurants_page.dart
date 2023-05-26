@@ -65,7 +65,7 @@ class _RestaurantListPageState extends State<RestaurantListPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               BlocProvider(
-                create: (context) => cubit,
+                create: (_) => cubit,
                 child: BlocBuilder<RestaurantsCubit, RestaurantsState>(
                   bloc: cubit,
                   builder: (context, state) {

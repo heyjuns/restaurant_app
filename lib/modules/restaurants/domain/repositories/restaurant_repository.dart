@@ -6,7 +6,6 @@ abstract class RestaurantRepository {
   Future<ResponseRestaurantListEntity> getListOfRestaurant();
   Future<ResponseRestaurantDetailEntity> getRestaurantDetail(String id);
   Future<ResponseRestaurantListEntity> getRestaurantBySearch(String searchTerm);
-  // Future<dynamic> getRestaurantImage(String size, String pictureId);
   Future<ResponseRestaurantAddReviewEntity> postRestaurantReview(
       String id, String name, String review);
 }

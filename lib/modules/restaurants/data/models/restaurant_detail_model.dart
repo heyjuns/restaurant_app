@@ -18,7 +18,7 @@ class RestaurantDetailModel extends RestaurantDetailEntity {
             categories: List<NameEntity>.from(json["categories"].map(
               (item) => NameModel.fromJson(item),
             )),
-            menus: MenusModel.fromJson(json["menus"]),
+            menus: MenuListModel.fromJson(json["menus"]),
             customerReviews: List<RestaurantCustomerReviewEntity>.from(
                 json["customerReviews"].map(
               (item) => RestaurantCustomerReviewModel.fromJson(item),

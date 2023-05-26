@@ -42,7 +42,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
             child: Column(
           children: [
             BlocProvider(
-              create: (context) => cubit,
+              create: (_) => cubit,
               child: BlocBuilder<RestaurantDetailCubit, RestaurantDetailState>(
                 builder: (context, state) {
                   if (state is RestaurantDetailLoadingState) {
@@ -57,8 +57,10 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                           children: [
                             Hero(
                               tag: state.restaurant.pictureId,
-                              child: Image.network(Utils.getImageUrl(
-                                  'medium', state.restaurant.pictureId)),
+                              child: Image.network(
+                                Utils.getImageUrl(
+                                    'medium', state.restaurant.pictureId),
+                              ),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -182,7 +184,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                     ),
               ),
               const Divider(),
-              buildratingHighlight(state.restaurant, context),
+              buildRatingHighlight(state.restaurant, context),
               const Divider(),
               Text(state.restaurant.description),
               SizedBox(
@@ -211,7 +213,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
     );
   }
 
-  InkWell buildratingHighlight(
+  InkWell buildRatingHighlight(
       RestaurantDetailEntity restaurant, BuildContext context) {
     return InkWell(
       onTap: () {
@@ -241,7 +243,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                 const SizedBox(
                   width: 4,
                 ),
-                Text('(${restaurant.customerReviews.length.toString()})'),
+                Text(restaurant.customerReviews.length.toString()),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 8),
                   decoration: const BoxDecoration(

@@ -1,10 +1,10 @@
 import 'name_entity.dart';
 
-class MenusEntity {
+class MenuListEntity {
   final List<NameEntity> foods;
   final List<NameEntity> drinks;
 
-  MenusEntity({
+  MenuListEntity({
     required this.foods,
     required this.drinks,
   });

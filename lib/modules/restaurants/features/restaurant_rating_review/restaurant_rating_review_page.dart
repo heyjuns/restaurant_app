@@ -23,6 +23,8 @@ class _RestaurantRatingReviewPageState
     extends State<RestaurantRatingReviewPage> {
   late RestaurantRatingReviewCubit cubit;
 
+  TextEditingController name = TextEditingController();
+  TextEditingController review = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -34,13 +36,20 @@ class _RestaurantRatingReviewPageState
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    name.dispose();
+    review.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Rating and Review'),
       ),
       body: BlocProvider(
-        create: (context) => cubit,
+        create: (_) => cubit,
         child: MultiBlocListener(
           listeners: [
             BlocListener<RestaurantRatingReviewCubit,
@@ -159,10 +168,6 @@ class _RestaurantRatingReviewPageState
                             showDialog(
                               context: context,
                               builder: (context) {
-                                TextEditingController name =
-                                    TextEditingController();
-                                TextEditingController review =
-                                    TextEditingController();
                                 return AlertDialog(
                                   title: const Text(
                                       'Tell us about the restaurant'),
@@ -220,7 +225,7 @@ class _RestaurantRatingReviewPageState
             if (state is RestaurantRatingReviewNoInternetState) {
               return const NoInternetWidget();
             }
-            return Container();
+            return const SizedBox();
           }),
         ),
       ),

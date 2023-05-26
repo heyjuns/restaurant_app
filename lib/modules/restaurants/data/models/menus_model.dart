@@ -1,9 +1,9 @@
 import '../../domain/entities/name_entity.dart';
-import '../../domain/entities/menus_entity.dart';
+import '../../domain/entities/menu_list_entity.dart';
 import 'name_model.dart';
 
-class MenusModel extends MenusEntity {
-  MenusModel.fromJson(Map<String, dynamic> json)
+class MenuListModel extends MenuListEntity {
+  MenuListModel.fromJson(Map<String, dynamic> json)
       : super(
           drinks: List<NameEntity>.from(
             json["drinks"].map(

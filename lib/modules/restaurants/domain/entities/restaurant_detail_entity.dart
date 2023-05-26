@@ -1,6 +1,6 @@
 import 'package:restaurant_app/modules/restaurants/domain/entities/restaurant_customer_review_entity.dart';
 import 'package:restaurant_app/modules/restaurants/domain/entities/name_entity.dart';
-import 'menus_entity.dart';
+import 'menu_list_entity.dart';
 
 class RestaurantDetailEntity {
   final String id;
@@ -10,7 +10,7 @@ class RestaurantDetailEntity {
   final String city;
   final num rating;
   final List<NameEntity> categories;
-  final MenusEntity menus;
+  final MenuListEntity menus;
   final List<RestaurantCustomerReviewEntity> customerReviews;
 
   RestaurantDetailEntity({
