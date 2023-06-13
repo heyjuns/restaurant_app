@@ -6,7 +6,7 @@ import 'package:restaurant_app/modules/restaurants/domain/entities/restaurant_de
 import 'package:restaurant_app/modules/restaurants/features/restaurant_detail/restaurant_detail_state.dart';
 import 'package:restaurant_app/modules/restaurants/features/restaurant_rating_review/restaurant_rating_review_page.dart';
 import 'package:restaurant_app/modules/restaurants/widgets/no_internet_widget.dart';
-import 'package:restaurant_app/utils.dart';
+import 'package:restaurant_app/utils/utils.dart';
 
 import 'restaurant_detail_cubit.dart';
 import 'package:flutter_svg/flutter_svg.dart';

@@ -9,7 +9,7 @@ import 'package:restaurant_app/modules/restaurants/domain/entities/response_rest
 import 'package:restaurant_app/modules/restaurants/domain/entities/response_restaurant_detail_entity.dart';
 
 import 'package:restaurant_app/modules/restaurants/domain/entities/response_restaurant_add_review_entity.dart';
-import 'package:restaurant_app/utils.dart';
+import 'package:restaurant_app/utils/utils.dart';
 import '../../domain/repositories/restaurant_repository.dart';
 import 'package:http/http.dart' as http;
 
