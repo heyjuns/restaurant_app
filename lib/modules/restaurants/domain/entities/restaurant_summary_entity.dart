@@ -1,4 +1,6 @@
-class RestaurantSummaryEntity {
+import 'package:equatable/equatable.dart';
+
+class RestaurantSummaryEntity extends Equatable {
   final String id;
   final String name;
   final String description;
@@ -6,7 +8,7 @@ class RestaurantSummaryEntity {
   final String city;
   final num rating;
 
-  RestaurantSummaryEntity({
+  const RestaurantSummaryEntity({
     required this.id,
     required this.name,
     required this.description,
@@ -36,4 +38,14 @@ class RestaurantSummaryEntity {
       rating: map['rating'],
     );
   }
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        description,
+        pictureId,
+        city,
+        rating,
+      ];
 }

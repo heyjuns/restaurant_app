@@ -9,7 +9,7 @@ void main() {
       const error = false;
       const message = 'Restaurant list retrieved successfully';
       const count = 5;
-      final restaurants = [
+      const restaurants = [
         RestaurantSummaryEntity(
           id: '1',
           name: 'Restaurant 1',

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:restaurant_app/modules/restaurants/data/models/response_restaurant_list_model.dart';
-import 'package:restaurant_app/modules/restaurants/data/models/restaurant_summary_entity.dart';
+import 'package:restaurant_app/modules/restaurants/data/models/restaurant_summary_model.dart';
 import 'package:restaurant_app/modules/restaurants/domain/entities/restaurant_summary_entity.dart';
 
 void main() {

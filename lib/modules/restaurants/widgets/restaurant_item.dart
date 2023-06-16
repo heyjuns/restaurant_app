@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/modules/restaurants/domain/entities/restaurant_summary_entity.dart';
 import 'package:restaurant_app/modules/restaurants/features/restaurant_detail/restaurant_detail_page.dart';
-import 'package:restaurant_app/utils.dart';
+import 'package:restaurant_app/utils/utils.dart';
 
 import 'subtitle_icon.dart';
 

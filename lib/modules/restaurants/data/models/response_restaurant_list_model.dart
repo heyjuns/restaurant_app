@@ -1,4 +1,4 @@
-import 'package:restaurant_app/modules/restaurants/data/models/restaurant_summary_entity.dart';
+import 'package:restaurant_app/modules/restaurants/data/models/restaurant_summary_model.dart';
 import 'package:restaurant_app/modules/restaurants/domain/entities/response_restaurant_list_entity.dart';
 import 'package:restaurant_app/modules/restaurants/domain/entities/restaurant_summary_entity.dart';
 

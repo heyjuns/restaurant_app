@@ -5,7 +5,7 @@ import 'package:restaurant_app/utils/database_helper.dart';
 
 class RestaurantsFavoriteBloc
     extends Bloc<RestaurantsFavoriteEvent, RestaurantsFavoriteState> {
-  final DatabaseHelper databaseHelper = DatabaseHelper.instance;
+  final DatabaseHelper databaseHelper = DatabaseHelper();
 
   RestaurantsFavoriteBloc() : super(RestaurantsFavoriteInitialState());
 

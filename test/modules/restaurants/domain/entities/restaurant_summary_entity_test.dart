@@ -13,7 +13,7 @@ void main() {
       const rating = 4.5;
 
       // Act
-      final summaryEntity = RestaurantSummaryEntity(
+      const summaryEntity = RestaurantSummaryEntity(
         id: id,
         name: name,
         description: description,

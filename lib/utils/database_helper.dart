@@ -6,40 +6,42 @@ import '../modules/restaurants/domain/entities/restaurant_summary_entity.dart';
 class DatabaseHelper {
   static const String dbName = 'restaurant_db.db';
   static const String favoriteTable = 'favorite_restaurants';
+  static Database? _database;
+  static final DatabaseHelper _databaseHelper = DatabaseHelper._internal();
 
-  DatabaseHelper._privateConstructor();
-  static final DatabaseHelper instance = DatabaseHelper._privateConstructor();
+  DatabaseHelper._internal();
 
-  late Database? _database;
+  factory DatabaseHelper() => _databaseHelper;
 
   Future<Database> get database async {
-    if (_database != null) {
-      return _database!;
-    }
-    _database = await _initDatabase();
+    _database ??= await _initDatabase();
     return _database!;
   }
 
   Future<Database> _initDatabase() async {
     final String path = join(await getDatabasesPath(), dbName);
-    return await openDatabase(
-      path,
-      version: 1,
-      onCreate: (db, version) {
-        return db.execute(
-          '''
-          CREATE TABLE $favoriteTable(
-            id TEXT PRIMARY KEY,
-            name TEXT,
-            description TEXT,
-            pictureId TEXT,
-            city TEXT,
-            rating REAL
-          )
-          ''',
-        );
-      },
-    );
+    try {
+      return await openDatabase(
+        path,
+        version: 1,
+        onCreate: (db, version) {
+          return db.execute(
+            '''
+            CREATE TABLE $favoriteTable(
+              id TEXT PRIMARY KEY,
+              name TEXT,
+              description TEXT,
+              pictureId TEXT,
+              city TEXT,
+              rating REAL
+            )
+            ''',
+          );
+        },
+      );
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<void> insertFavoriteRestaurant(
@@ -48,9 +50,8 @@ class DatabaseHelper {
     await db.insert(
       favoriteTable,
       restaurant.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
+      // conflictAlgorithm: ConflictAlgorithm.replace,
     );
-    print('add ${restaurant.id} to db');
   }
 
   Future<void> deleteFavoriteRestaurant(String restaurantId) async {

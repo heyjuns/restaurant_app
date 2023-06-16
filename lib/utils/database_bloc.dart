@@ -9,7 +9,7 @@ class FavoriteRestaurantBloc {
   Stream<List<RestaurantSummaryEntity>> get favoriteRestaurants =>
       _favoriteRestaurantController.stream;
 
-  final _databaseHelper = DatabaseHelper.instance;
+  final _databaseHelper = DatabaseHelper();
 
   Future<void> fetchFavoriteRestaurants() async {
     final favoriteRestaurants = await _databaseHelper.getFavoriteRestaurants();
