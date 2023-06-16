@@ -6,17 +6,17 @@ void main() {
   group('MenuListEntity', () {
     test('should create a MenuListEntity instance', () {
       // Arrange
-      final foods = [
+      const foods = [
         NameEntity(name: 'Pizza'),
         NameEntity(name: 'Burger'),
       ];
-      final drinks = [
+      const drinks = [
         NameEntity(name: 'Coke'),
         NameEntity(name: 'Sprite'),
       ];
 
       // Act
-      final menuListEntity = MenuListEntity(foods: foods, drinks: drinks);
+      const menuListEntity = MenuListEntity(foods: foods, drinks: drinks);
 
       // Assert
       expect(menuListEntity.foods, equals(foods));

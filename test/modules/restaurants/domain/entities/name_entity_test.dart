@@ -8,7 +8,7 @@ void main() {
       const name = 'John Doe';
 
       // Act
-      final nameEntity = NameEntity(name: name);
+      const nameEntity = NameEntity(name: name);
 
       // Assert
       expect(nameEntity.name, equals(name));

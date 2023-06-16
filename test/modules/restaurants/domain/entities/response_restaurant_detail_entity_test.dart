@@ -11,7 +11,7 @@ void main() {
       // Arrange
       const error = false;
       const message = 'Restaurant detail retrieved successfully';
-      final restaurant = RestaurantDetailEntity(
+      const restaurant = RestaurantDetailEntity(
         id: '1',
         name: 'Restaurant 1',
         description: 'Restaurant 1 description',
@@ -47,7 +47,7 @@ void main() {
       );
 
       // Act
-      final responseEntity = ResponseRestaurantDetailEntity(
+      const responseEntity = ResponseRestaurantDetailEntity(
         error: error,
         message: message,
         restaurant: restaurant,

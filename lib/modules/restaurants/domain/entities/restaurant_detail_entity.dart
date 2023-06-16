@@ -1,8 +1,9 @@
+import 'package:equatable/equatable.dart';
 import 'package:restaurant_app/modules/restaurants/domain/entities/restaurant_customer_review_entity.dart';
 import 'package:restaurant_app/modules/restaurants/domain/entities/name_entity.dart';
 import 'menu_list_entity.dart';
 
-class RestaurantDetailEntity {
+class RestaurantDetailEntity extends Equatable {
   final String id;
   final String name;
   final String description;
@@ -13,7 +14,7 @@ class RestaurantDetailEntity {
   final MenuListEntity menus;
   final List<RestaurantCustomerReviewEntity> customerReviews;
 
-  RestaurantDetailEntity({
+  const RestaurantDetailEntity({
     required this.id,
     required this.name,
     required this.description,
@@ -24,4 +25,17 @@ class RestaurantDetailEntity {
     required this.categories,
     required this.customerReviews,
   });
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        description,
+        pictureId,
+        city,
+        rating,
+        menus,
+        categories,
+        customerReviews,
+      ];
 }

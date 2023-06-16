@@ -14,11 +14,11 @@ void main() {
       const pictureId = '1.jpg';
       const city = 'City 1';
       const rating = 4.2;
-      final categories = [
+      const categories = [
         NameEntity(name: 'Category 1'),
         NameEntity(name: 'Category 2'),
       ];
-      final menus = MenuListEntity(
+      const menus = MenuListEntity(
         foods: [
           NameEntity(name: 'Food 1'),
           NameEntity(name: 'Food 2'),
@@ -28,7 +28,7 @@ void main() {
           NameEntity(name: 'Drink 2'),
         ],
       );
-      final customerReviews = [
+      const customerReviews = [
         RestaurantCustomerReviewEntity(
           name: 'John Doe',
           review: 'Great food and service!',
@@ -42,7 +42,7 @@ void main() {
       ];
 
       // Act
-      final entity = RestaurantDetailEntity(
+      const entity = RestaurantDetailEntity(
         id: id,
         name: name,
         description: description,

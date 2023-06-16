@@ -8,7 +8,7 @@ void main() {
       // Arrange
       const error = false;
       const message = 'Review added successfully';
-      final customerReviews = [
+      const customerReviews = [
         RestaurantCustomerReviewEntity(
           name: 'John Doe',
           review: 'Great food and service!',
@@ -22,7 +22,7 @@ void main() {
       ];
 
       // Act
-      final responseEntity = ResponseRestaurantAddReviewEntity(
+      const responseEntity = ResponseRestaurantAddReviewEntity(
         error: error,
         message: message,
         customerReviews: customerReviews,

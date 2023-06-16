@@ -29,7 +29,7 @@ void main() {
       ];
 
       // Act
-      final responseEntity = ResponseRestaurantListEntity(
+      const responseEntity = ResponseRestaurantListEntity(
         error: error,
         message: message,
         count: count,

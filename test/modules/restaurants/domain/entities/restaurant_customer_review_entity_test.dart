@@ -10,7 +10,7 @@ void main() {
       const date = '2023-06-08';
 
       // Act
-      final reviewEntity = RestaurantCustomerReviewEntity(
+      const reviewEntity = RestaurantCustomerReviewEntity(
         name: name,
         review: review,
         date: date,
