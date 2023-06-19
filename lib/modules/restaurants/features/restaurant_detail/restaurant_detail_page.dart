@@ -25,13 +25,19 @@ class RestaurantDetailPage extends StatefulWidget {
 
 class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
   late RestaurantDetailCubit cubit;
-
+  bool isFavorite = false;
   @override
   void initState() {
     super.initState();
     cubit = RestaurantDetailCubit(
       restaurantImpl: RestaurantImpl(),
     )..getDetail(widget.id);
+  }
+
+  toggleIsFavorite() {
+    setState(() {
+      isFavorite = !isFavorite;
+    });
   }
 
   @override
@@ -177,11 +183,27 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                '${state.restaurant.name} - ${state.restaurant.city}',
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      fontWeight: FontWeight.bold,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Flexible(
+                    child: Text(
+                      '${state.restaurant.name} - ${state.restaurant.city}',
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
                     ),
+                  ),
+                  IconButton(
+                      onPressed: () => toggleIsFavorite(),
+                      icon: isFavorite
+                          ? const Icon(
+                              Icons.favorite,
+                              color: Colors.red,
+                            )
+                          : const Icon(Icons.favorite_outline,
+                              color: Colors.red))
+                ],
               ),
               const Divider(),
               buildRatingHighlight(state.restaurant, context),
