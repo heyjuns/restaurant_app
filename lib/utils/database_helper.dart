@@ -1,3 +1,4 @@
+import 'package:restaurant_app/modules/restaurants/domain/entities/restaurant_detail_entity.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -7,11 +8,11 @@ class DatabaseHelper {
   static const String dbName = 'restaurant_db.db';
   static const String favoriteTable = 'favorite_restaurants';
   static Database? _database;
-  static final DatabaseHelper _databaseHelper = DatabaseHelper._internal();
+  static final DatabaseHelper _instance = DatabaseHelper._internal();
 
   DatabaseHelper._internal();
 
-  factory DatabaseHelper() => _databaseHelper;
+  factory DatabaseHelper() => _instance;
 
   Future<Database> get database async {
     _database ??= await _initDatabase();
@@ -45,12 +46,12 @@ class DatabaseHelper {
   }
 
   Future<void> insertFavoriteRestaurant(
-      RestaurantSummaryEntity restaurant) async {
+      RestaurantDetailEntity restaurant) async {
     final db = await database;
     await db.insert(
       favoriteTable,
       restaurant.toMap(),
-      // conflictAlgorithm: ConflictAlgorithm.replace,
+      conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 

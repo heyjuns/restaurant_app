@@ -6,6 +6,7 @@ import 'package:restaurant_app/modules/restaurants/domain/entities/restaurant_de
 import 'package:restaurant_app/modules/restaurants/features/restaurant_detail/restaurant_detail_state.dart';
 import 'package:restaurant_app/modules/restaurants/features/restaurant_rating_review/restaurant_rating_review_page.dart';
 import 'package:restaurant_app/modules/restaurants/widgets/no_internet_widget.dart';
+import 'package:restaurant_app/utils/database_cubit.dart';
 import 'package:restaurant_app/utils/utils.dart';
 
 import 'restaurant_detail_cubit.dart';
@@ -25,19 +26,31 @@ class RestaurantDetailPage extends StatefulWidget {
 
 class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
   late RestaurantDetailCubit cubit;
-  bool isFavorite = false;
+  late bool isFavorite;
+  late DatabaseCubit dbCubit;
   @override
   void initState() {
     super.initState();
     cubit = RestaurantDetailCubit(
       restaurantImpl: RestaurantImpl(),
     )..getDetail(widget.id);
+
+    dbCubit = BlocProvider.of<DatabaseCubit>(context);
+    initFavRestaurant();
   }
 
-  toggleIsFavorite() {
-    setState(() {
-      isFavorite = !isFavorite;
-    });
+  initFavRestaurant() async {
+    isFavorite = await dbCubit.isFavoriteRestaurant(widget.id);
+  }
+
+  toggleIsFavorite() async {
+    if (!isFavorite) {
+      dbCubit.addFavoriteRestaurant(cubit.restaurantDetail);
+    } else {
+      dbCubit.removeFavoriteRestaurant(widget.id);
+    }
+    await initFavRestaurant();
+    setState(() {});
   }
 
   @override

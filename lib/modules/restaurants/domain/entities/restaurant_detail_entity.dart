@@ -25,6 +25,16 @@ class RestaurantDetailEntity extends Equatable {
     required this.categories,
     required this.customerReviews,
   });
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'description': description,
+      'pictureId': pictureId,
+      'city': city,
+      'rating': rating,
+    };
+  }
 
   @override
   List<Object?> get props => [

@@ -30,14 +30,11 @@ class RestaurantCard extends StatelessWidget {
                   child: SizedBox(
                     width: 100,
                     height: 100,
-                    child: Hero(
-                      tag: restaurant.id,
-                      child: Image.network(
-                        Utils.getImageUrl("small", restaurant.pictureId),
-                        fit: BoxFit.cover,
-                        errorBuilder: (ctx, error, _) =>
-                            const Center(child: Icon(Icons.error)),
-                      ),
+                    child: Image.network(
+                      Utils.getImageUrl("small", restaurant.pictureId),
+                      fit: BoxFit.cover,
+                      errorBuilder: (ctx, error, _) =>
+                          const Center(child: Icon(Icons.error)),
                     ),
                   ),
                 ),
