@@ -42,6 +42,7 @@ dependencies:
   sqflite_common_ffi: ^2.2.5
   equatable: ^2.0.5
   path: ^1.8.0
+  android_alarm_manager_plus: ^3.0.1
 
 dev_dependencies:
   flutter_test:

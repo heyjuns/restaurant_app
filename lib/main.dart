@@ -1,8 +1,10 @@
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_app/modules/restaurants/features/restaurants/restaurants_page.dart';
 import 'package:restaurant_app/modules/restaurants/features/restaurants_favorite/restaurants_favorite_page.dart';
 import 'package:restaurant_app/modules/restaurants/features/settings/settings_page.dart';
+import 'package:restaurant_app/utils/background_service.dart';
 import 'package:restaurant_app/utils/database_cubit.dart';
 import 'package:restaurant_app/utils/database_helper.dart';
 
@@ -11,6 +13,12 @@ import 'modules/restaurants/features/restaurant_detail/restaurant_detail_page.da
 import 'modules/restaurants/features/restaurant_rating_review/restaurant_rating_review_page.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final BackgroundService bs = BackgroundService();
+  bs.initializeIsolate();
+  AndroidAlarmManager.initialize();
+
   runApp(const MyApp());
 }
 
