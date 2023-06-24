@@ -1,22 +1,29 @@
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:restaurant_app/modules/restaurants/features/restaurants/restaurants_page.dart';
 import 'package:restaurant_app/modules/restaurants/features/restaurants_favorite/restaurants_favorite_page.dart';
 import 'package:restaurant_app/modules/restaurants/features/settings/settings_page.dart';
 import 'package:restaurant_app/utils/background_service.dart';
 import 'package:restaurant_app/utils/database_cubit.dart';
 import 'package:restaurant_app/utils/database_helper.dart';
+import 'package:restaurant_app/utils/navigation.dart';
+import 'package:restaurant_app/utils/notification_helper.dart';
 
 import 'modules/restaurants/domain/entities/restaurant_detail_entity.dart';
 import 'modules/restaurants/features/restaurant_detail/restaurant_detail_page.dart';
 import 'modules/restaurants/features/restaurant_rating_review/restaurant_rating_review_page.dart';
 
+final FlutterLocalNotificationsPlugin flnp = FlutterLocalNotificationsPlugin();
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   final BackgroundService bs = BackgroundService();
+  final NotificationHelper nh = NotificationHelper();
+
   bs.initializeIsolate();
+  nh.initNotifications(flnp);
   AndroidAlarmManager.initialize();
 
   runApp(const MyApp());
@@ -44,6 +51,7 @@ class _MyAppState extends State<MyApp> {
     return BlocProvider(
       create: (context) => dbCubit,
       child: MaterialApp(
+        navigatorKey: navigatorKey,
         home: Scaffold(
           body: IndexedStack(
             index: currentIndex,

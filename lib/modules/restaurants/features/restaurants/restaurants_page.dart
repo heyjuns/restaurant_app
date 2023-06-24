@@ -29,8 +29,6 @@ class _RestaurantListPageState extends State<RestaurantListPage> {
     cubit = RestaurantsCubit(
       restaurantImpl: RestaurantImpl(),
     )..getList();
-
-    port.listen((message) async => bs.someTask());
   }
 
   @override

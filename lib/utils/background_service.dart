@@ -1,6 +1,10 @@
 import 'dart:isolate';
 import 'dart:ui';
 
+import 'package:restaurant_app/modules/restaurants/data/repositories/restaurant_impl.dart';
+import 'notification_helper.dart';
+import 'package:restaurant_app/main.dart';
+
 final ReceivePort port = ReceivePort();
 
 class BackgroundService {
@@ -19,13 +23,12 @@ class BackgroundService {
   }
 
   static Future<void> callback() async {
-    print('alarm fired!');
+    print('Alarm fired!');
+    final NotificationHelper notificationHelper = NotificationHelper();
+    final result = await RestaurantImpl().getListOfRestaurant();
+    await notificationHelper.showNotification(flnp, result.restaurants);
 
     _uiSendPort ??= IsolateNameServer.lookupPortByName(_isolateName);
     _uiSendPort?.send(null);
-  }
-
-  Future<void> someTask() async {
-    print('Updated data from the background isolate');
   }
 }
