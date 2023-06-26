@@ -17,7 +17,6 @@ class DateTimeHelper {
     final resultTomorrow = completeFormat.parseStrict(tomorrowDateAndTime);
 
     final result = now.isAfter(resultToday) ? resultTomorrow : resultToday;
-    print(result);
     return result;
   }
 }

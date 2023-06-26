@@ -7,8 +7,4 @@ abstract class SettingsPageState {}
 
 class SettingsPageInitialState extends SettingsPageState {}
 
-class PushNotificationToggledState extends SettingsPageState {
-  final bool isEnabled;
-
-  PushNotificationToggledState(this.isEnabled);
-}
+class PushNotificationToggledState extends SettingsPageState {}

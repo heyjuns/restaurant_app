@@ -15,7 +15,6 @@ class DatabaseCubit extends Cubit<DatabaseState> {
     try {
       final response = await databaseHelper.getFavoriteRestaurants();
       if (response.isNotEmpty) {
-        print(response.length);
         favoriteRestaurants = response;
         emit(DatabaseHasData(response));
       } else {
@@ -32,10 +31,8 @@ class DatabaseCubit extends Cubit<DatabaseState> {
 
     try {
       await databaseHelper.insertFavoriteRestaurant(restaurant);
-      print('success add favorite');
       getFavoriteRestaurants();
     } catch (e) {
-      print('$e');
       emit(DatabaseError('Error: $e'));
     }
   }
@@ -44,7 +41,6 @@ class DatabaseCubit extends Cubit<DatabaseState> {
     emit(DatabaseLoading());
 
     final result = await databaseHelper.isFavoriteRestaurant(id);
-    print(result);
     return result;
   }
 
@@ -53,7 +49,6 @@ class DatabaseCubit extends Cubit<DatabaseState> {
 
     try {
       await databaseHelper.deleteFavoriteRestaurant(id);
-      print('success remove favorite');
       getFavoriteRestaurants();
     } catch (e) {
       emit(DatabaseError('Error: $e'));
